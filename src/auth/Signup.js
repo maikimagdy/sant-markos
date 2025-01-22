@@ -29,11 +29,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+    <div className="flex flex-col items-center justify-center md:mt-24 md:mr-28 mt-16  p-6">
       <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
       <form
         onSubmit={handleSignUp}
-        className="md:w-1/2 w-full  bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="md:w-1/2 w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
         <div className="mb-4">
           <label

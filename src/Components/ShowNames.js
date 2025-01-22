@@ -104,7 +104,7 @@ function ShowNames() {
 
   if (user) {
     return (
-      <div className="m-4 ">
+      <div className="m-4">
         <h1 className="text-2xl font-bold mb-4">
           {filteredUsers.length === 0
             ? "No results found"
@@ -118,14 +118,12 @@ function ShowNames() {
             placeholder="Search for a user..."
             className="border-2 p-2 rounded-lg  w-full max-w-md"
           />
-          {/* <label htmlFor="year" className="mr-2">
-            Search by Year:
-          </label> */}
+
           <select
             id="year"
             value={selectedYear}
             onChange={(e) => setSelectedYear(e.target.value)}
-            className="border-2 p-2 rounded-lg"
+            className="border-2 p-2 rounded-lg text-gray-600"
           >
             <option value="">All Years</option>
             {[...new Set(users.map((user) => user.Year))].map((year, index) => (
@@ -158,11 +156,11 @@ function ShowNames() {
                 {filteredUsers.map((user) => (
                   <tr
                     key={user.id}
-                    className="hover:bg-gray-50 text-md text-gray-700"
+                    className="hover:bg-purple-950 text-md text-white font-semibold"
                   >
                     {editingUser === user.id ? (
                       <>
-                        <td className="p-4 border-b">
+                        <td className="p-4 border-b text-black">
                           <input
                             value={formData.Name}
                             onChange={(e) =>
@@ -171,7 +169,7 @@ function ShowNames() {
                             className="border rounded-lg p-2 w-full"
                           />
                         </td>
-                        <td className="p-4 border-b">
+                        <td className="p-4 border-b text-black">
                           <input
                             value={formData.Address}
                             onChange={(e) =>
@@ -183,7 +181,7 @@ function ShowNames() {
                             className="border rounded-lg p-2 w-full"
                           />
                         </td>
-                        <td className="p-4 border-b">
+                        <td className="p-4 border-b text-black">
                           <input
                             value={formData.Phone}
                             onChange={(e) =>
@@ -195,7 +193,7 @@ function ShowNames() {
                             className="border rounded-lg p-2 w-full"
                           />
                         </td>
-                        <td className="p-4 border-b">
+                        <td className="p-4 border-b text-black">
                           <input
                             value={formData.Year}
                             onChange={(e) =>
@@ -204,19 +202,21 @@ function ShowNames() {
                             className="border rounded-lg p-2 w-full"
                           />
                         </td>
-                        <td className="p-4 border-b flex justify-center gap-2">
-                          <button
-                            onClick={saveEditing}
-                            className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-400"
-                          >
-                            Save
-                          </button>
-                          <button
-                            onClick={() => setEditingUser(null)}
-                            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400"
-                          >
-                            Cancel
-                          </button>
+                        <td className="p-4 border-b">
+                          <div className="flex justify-center items-center gap-2">
+                            <button
+                              onClick={saveEditing}
+                              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-400"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={() => setEditingUser(null)}
+                              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400"
+                            >
+                              Cancel
+                            </button>
+                          </div>
                         </td>
                       </>
                     ) : (
@@ -233,19 +233,21 @@ function ShowNames() {
                         <td className="p-4 border-b">
                           {highlightText(user.Year || "N/A", search)}
                         </td>
-                        <td className="p-4 border-b flex justify-center gap-2">
-                          <button
-                            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400"
-                            onClick={() => DeleteDoc(user.id)}
-                          >
-                            ❌
-                          </button>
-                          <button
-                            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400"
-                            onClick={() => startEditing(user)}
-                          >
-                            📝
-                          </button>
+                        <td className="p-4 border-b">
+                          <div className="flex justify-center items-center gap-2">
+                            <button
+                              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400"
+                              onClick={() => DeleteDoc(user.id)}
+                            >
+                              ❌
+                            </button>
+                            <button
+                              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400"
+                              onClick={() => startEditing(user)}
+                            >
+                              📝
+                            </button>
+                          </div>
                         </td>
                       </>
                     )}
@@ -257,7 +259,7 @@ function ShowNames() {
         )}
 
         <Link
-          className="bg-slate-700 text-white p-4 mt-4 inline-block rounded-lg hover:bg-slate-500"
+          className="bg-orange-500 text-white p-4 mt-4 inline-block rounded-lg hover:bg-orange-400 font-semibold"
           to={"/namesform"}
         >
           Add User

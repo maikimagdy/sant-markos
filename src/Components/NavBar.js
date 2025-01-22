@@ -20,7 +20,7 @@ function NavBar() {
 
   if (loading) {
     return (
-      <div className="flex justify-between bg-slate-700 text-white p-8">
+      <div className="flex justify-between bg-purple-950 text-white p-8">
         <h1
           className=" bg-cover bg-center rounded-full"
           style={{ backgroundImage: `url(${logo})` }}
@@ -31,7 +31,7 @@ function NavBar() {
   }
 
   return (
-    <div className="flex justify-between bg-slate-700 text-white md:p-8 p-3 items-center">
+    <div className="flex justify-between bg-purple-950 text-white md:p-8 p-3 items-center">
       <h1
         className="w-20 h-20 bg-cover bg-center rounded-full"
         style={{ backgroundImage: `url(${logo})` }}
@@ -41,7 +41,7 @@ function NavBar() {
         <div>
           <button
             onClick={handleSignOut}
-            className="text-white w-full p-4 rounded-md bg-orange-500 hover:bg-orange-400 transition duration-200 ease-in-out shadow-lg"
+            className="text-white w-full font-semibold p-4 rounded-md bg-orange-500 hover:bg-orange-400 transition duration-200 ease-in-out shadow-lg"
           >
             LogOut
           </button>
@@ -49,13 +49,13 @@ function NavBar() {
       ) : (
         <div className="flex space-x-4">
           <Link
-            className="bg-orange-500  md:px-8 p-3 rounded-md flex items-center justify-center hover:bg-orange-400"
+            className="bg-orange-500  font-semibold md:px-8 p-3 rounded-md flex items-center justify-center hover:bg-orange-400"
             to={"/login"}
           >
             Login
           </Link>
           <Link
-            className="bg-orange-500 md:px-8 p-3 py-4 rounded-md  flex items-center justify-center hover:bg-orange-400"
+            className="bg-orange-500  font-semibold md:px-8 p-3 py-4 rounded-md  flex items-center justify-center hover:bg-orange-400"
             to={"/signup"}
           >
             SignUp

@@ -51,34 +51,34 @@ function NamesForm() {
   };
   if (user) {
     return (
-      <div dir="rtl">
+      <div>
         <form
           onSubmit={handleSubmit(SubmitFun)}
-          className="flex flex-col gap-2 m-2"
+          className="flex flex-col gap-2 m-2 text-black"
         >
           <input
             placeholder="Name...."
-            className="shadow-lg px-2 py-6"
+            className="shadow-lg px-2 py-6 rounded-sm"
             {...register("Name")}
           />
           <p className="text-red-600 text-sm">{errors.Name?.message}</p>
 
           <input
             placeholder="Phone...."
-            className="py-6 px-2 shadow-lg"
+            className="py-6 px-2 shadow-lg rounded-sm"
             {...register("Phone")}
           />
           <p className="text-red-600 text-sm">{errors.Phone?.message}</p>
           <input
             placeholder="Year...."
-            className="py-6 px-2 shadow-lg"
+            className="py-6 px-2 shadow-lg rounded-sm"
             {...register("Year")}
           />
           <p className="text-red-600 text-sm">{errors.Year?.message}</p>
 
           <input
             placeholder="Address...."
-            className="py-10 px-2 shadow-lg"
+            className="py-10 px-2 shadow-lg rounded-sm"
             {...register("Address")}
           />
           <p className="text-red-600 text-sm">{errors.Address?.message}</p>
@@ -86,11 +86,11 @@ function NamesForm() {
           <div className="flex gap-2">
             <input
               type="submit"
-              className="self-start bg-slate-500 p-3 rounded-md text-white cursor-pointer hover:bg-slate-400"
+              className="self-start bg-green-500 hover:bg-green-700 p-3 rounded-md text-white cursor-pointer font-semibold"
             />
             <button
               onClick={Back}
-              className="self-start bg-slate-500 px-6 py-3 rounded-md text-white cursor-pointer hover:bg-slate-400"
+              className="self-start bg-blue-500 hover:bg-blue-700 px-6 py-3 font-semibold rounded-md text-white cursor-pointer "
             >
               Back
             </button>

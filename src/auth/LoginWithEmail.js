@@ -30,17 +30,17 @@ const LoginWithEmail = () => {
     }
   };
 
-  if (user) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <h1 className="text-2xl font-bold mb-4">Welcome Back!</h1>
-        <p>You are already signed in as {user.email}.</p>
-      </div>
-    );
-  }
+  // if (user) {
+  //   return (
+  //     <div className="flex flex-col items-center justify-center min-h-screen ">
+  //       <h1 className="text-2xl font-bold mb-4">Welcome Back!</h1>
+  //       <p>You are already signed in as {user.email}.</p>
+  //     </div>
+  //   );
+  // }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6 ">
+    <div className="flex flex-col items-center justify-center md:mt-24 md:mr-28 mt-16  p-6 ">
       <h1 className="text-2xl font-bold mb-4">Login</h1>
       <form
         onSubmit={handleSignIn}
