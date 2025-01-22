@@ -61,27 +61,35 @@ function NamesForm() {
             className="shadow-lg px-2 py-6 rounded-sm"
             {...register("Name")}
           />
-          <p className="text-red-600 text-sm">{errors.Name?.message}</p>
+          <p className="text-red-800 text-sm font-bold">
+            {errors.Name?.message}
+          </p>
 
           <input
             placeholder="Phone...."
             className="py-6 px-2 shadow-lg rounded-sm"
             {...register("Phone")}
           />
-          <p className="text-red-600 text-sm">{errors.Phone?.message}</p>
+          <p className="text-red-800 text-sm font-bold">
+            {errors.Phone?.message}
+          </p>
           <input
             placeholder="Year...."
             className="py-6 px-2 shadow-lg rounded-sm"
             {...register("Year")}
           />
-          <p className="text-red-600 text-sm">{errors.Year?.message}</p>
+          <p className="text-red-800 text-sm font-bold">
+            {errors.Year?.message}
+          </p>
 
           <input
             placeholder="Address...."
             className="py-10 px-2 shadow-lg rounded-sm"
             {...register("Address")}
           />
-          <p className="text-red-600 text-sm">{errors.Address?.message}</p>
+          <p className="text-red-600 text-sm font-bold">
+            {errors.Address?.message}
+          </p>
 
           <div className="flex gap-2">
             <input

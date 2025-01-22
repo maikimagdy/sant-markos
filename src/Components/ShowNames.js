@@ -79,7 +79,7 @@ function ShowNames() {
     const parts = safeText.split(new RegExp(`(${query})`, "gi"));
     return parts.map((part, index) =>
       part.toLowerCase() === query.toLowerCase() ? (
-        <span key={index} className="bg-yellow-300 font-bold">
+        <span key={index} className="bg-orange-500 font-bold">
           {part}
         </span>
       ) : (
@@ -116,7 +116,7 @@ function ShowNames() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search for a user..."
-            className="border-2 p-2 rounded-lg  w-full max-w-md"
+            className="border-2 p-2 rounded-lg w-full max-w-md text-black"
           />
 
           <select

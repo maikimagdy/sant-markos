@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase.ts";
 import { useNavigate } from "react-router-dom";
+import ShowNames from "./ShowNames.js";
 
 const WelcomePage = () => {
   const [user] = useAuthState(auth);
@@ -21,8 +22,10 @@ const WelcomePage = () => {
   // If no user is logged in
   if (!user) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <h1 className="text-3xl">Please Sign In To Continue...</h1>
+      <div className=" mt-4 justify-center ">
+        <h1 className="text-xl font-semibold ">
+          Welcome to ST-Markos Page Please Sign In To Continue...
+        </h1>
       </div>
     );
   }
@@ -34,6 +37,7 @@ const WelcomePage = () => {
         {welcome && (
           <h1 className="text-3xl font-bold text-center">
             Welcome! You Signed In As Admin...
+            {/* <ShowNames /> */}
           </h1>
         )}
       </div>

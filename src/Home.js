@@ -1,14 +1,13 @@
 import React from "react";
 import NavBar from "./Components/NavBar";
 import { Outlet } from "react-router-dom";
-import Body from "./Components/Body";
+import WelcomePage from "./Components/WelcomePage";
 
 function Home() {
   return (
-    <div className="">
+    <div>
       <NavBar />
       <Outlet />
-      <Body />
     </div>
   );
 }

@@ -2,5 +2,5 @@ body {
   background: linear-gradient(to bottom right, #654ea3, #eaafc8);
   margin: 0;
   color: white;
-  height: 100vh;
+  min-height: 100vh;
 }

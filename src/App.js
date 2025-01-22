@@ -15,7 +15,7 @@ function App() {
           <Route path="login" element={<LoginWithEmail />} />
           <Route path="signup" element={<Signup />} />
           <Route element={<NamesForm />} path="/namesform" />
-          <Route path="/welcome" element={<WelcomePage />} /> {/* New route */}
+          <Route path="/welcome" element={<WelcomePage />} />
           <Route element={<ShowNames />} path="/shownames" />
         </Route>
       </Routes>
