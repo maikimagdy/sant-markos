@@ -166,7 +166,7 @@ function ShowNames() {
                             onChange={(e) =>
                               setFormData({ ...formData, Name: e.target.value })
                             }
-                            className="border rounded-lg p-2 w-full"
+                            className="border rounded-lg p-2  md:w-full w-fit"
                           />
                         </td>
                         <td className="p-4 border-b text-black">
@@ -178,7 +178,7 @@ function ShowNames() {
                                 Address: e.target.value,
                               })
                             }
-                            className="border rounded-lg p-2 w-full"
+                            className="border rounded-lg p-2  md:w-full w-fit"
                           />
                         </td>
                         <td className="p-4 border-b text-black">
@@ -190,7 +190,7 @@ function ShowNames() {
                                 Phone: e.target.value,
                               })
                             }
-                            className="border rounded-lg p-2 w-full"
+                            className="border rounded-lg p-2  md:w-full w-fit"
                           />
                         </td>
                         <td className="p-4 border-b text-black">
@@ -199,7 +199,7 @@ function ShowNames() {
                             onChange={(e) =>
                               setFormData({ ...formData, Year: e.target.value })
                             }
-                            className="border rounded-lg p-2 w-full"
+                            className="border rounded-lg p-2  md:w-full w-fit"
                           />
                         </td>
                         <td className="p-4 border-b">
