@@ -12,7 +12,7 @@ function NavBar() {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      nav("/welcome");
+      nav("/");
     } catch (err) {
       console.error("Error signing out:", err.message);
     }
