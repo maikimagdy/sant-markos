@@ -169,7 +169,7 @@ function ShowNames() {
                             className="border rounded-lg p-2  md:w-full w-fit"
                           />
                         </td>
-                        <td className="p-4 border-b text-black">
+                        <td className=" border-b whitespace-nowrap text-black">
                           <input
                             value={formData.Address}
                             onChange={(e) =>
