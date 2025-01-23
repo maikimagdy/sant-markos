@@ -15,8 +15,7 @@ function ShowNames() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [user] = useAuthState(auth);
-  const [selectedYear, setSelectedYear] = useState(""); // State for selected year
-
+  const [selectedYear, setSelectedYear] = useState("");
   const [formData, setFormData] = useState({
     Name: "",
     Address: "",
@@ -25,6 +24,8 @@ function ShowNames() {
   });
   const [editingUser, setEditingUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 10;
 
   const GetUsers = async () => {
     setLoading(true);
@@ -102,45 +103,52 @@ function ShowNames() {
     return searchText.includes(search.toLowerCase()) && yearMatches;
   });
 
-  if (user) {
-    return (
-      <div className="m-4">
-        <h1 className="text-2xl font-bold mb-4">
-          {filteredUsers.length === 0
-            ? "No results found"
-            : "Information of Users..."}
-        </h1>
-        <div className="mb-4 flex gap-6">
-          <input
-            type="search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search for a user..."
-            className="border-2 p-2 rounded-lg w-full max-w-md text-black"
-          />
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+  const startIndex = (currentPage - 1) * usersPerPage;
+  const currentUsers = filteredUsers.slice(
+    startIndex,
+    startIndex + usersPerPage
+  );
 
-          <select
-            id="year"
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
-            className="border-2 p-2 rounded-lg text-gray-600"
-          >
-            <option value="">All Years</option>
-            {[...new Set(users.map((user) => user.Year))].map((year, index) => (
-              <option key={index} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
+  return user ? (
+    <div className="m-4">
+      <h1 className="text-2xl font-bold mb-4">
+        {filteredUsers.length === 0
+          ? "No results found"
+          : "Information of Users..."}
+      </h1>
+      <div className="mb-4 flex gap-6">
+        <input
+          type="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search for a user..."
+          className="border-2 p-2 rounded-lg w-full max-w-md text-black"
+        />
+
+        <select
+          id="year"
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(e.target.value)}
+          className="border-2 p-2 rounded-lg text-gray-600"
+        >
+          <option value="">All Years</option>
+          {[...new Set(users.map((user) => user.Year))].map((year, index) => (
+            <option key={index} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
+      </div>
+      {loading && (
+        <div className="flex justify-center items-center space-x-2">
+          <span>Loading...</span>
+          <div className="w-6 h-6 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
         </div>
-        {loading && (
-          <div className="flex justify-center items-center space-x-2">
-            <span>Loading...</span>
-            <div className="w-6 h-6 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
-          </div>
-        )}
+      )}
 
-        {!loading && (
+      {!loading && (
+        <>
           <div className="overflow-x-auto">
             <table className="table-auto w-full border-collapse border border-gray-300 shadow-lg rounded-lg">
               <thead>
@@ -153,7 +161,7 @@ function ShowNames() {
                 </tr>
               </thead>
               <tbody>
-                {filteredUsers.map((user) => (
+                {currentUsers.map((user) => (
                   <tr
                     key={user.id}
                     className="hover:bg-purple-950 text-md text-white font-semibold"
@@ -256,18 +264,40 @@ function ShowNames() {
               </tbody>
             </table>
           </div>
-        )}
+          <div className="mt-4 flex justify-between items-center">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400"
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span className="font-semibold">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400"
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
 
-        <Link
-          className="bg-orange-500 text-white p-4 mt-4 inline-block rounded-lg hover:bg-orange-400 font-semibold"
-          to={"/namesform"}
-        >
-          Add User
-        </Link>
-      </div>
-    );
-  }
-  return <div>U r not signed in</div>;
+      <Link
+        className="bg-orange-500 text-white p-4 mt-4 inline-block rounded-lg hover:bg-orange-400 font-semibold"
+        to={"/namesform"}
+      >
+        Add User
+      </Link>
+    </div>
+  ) : (
+    <div>U r not signed in</div>
+  );
 }
 
 export default ShowNames;

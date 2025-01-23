@@ -31,7 +31,7 @@ function NavBar() {
   }
 
   return (
-    <div className="flex justify-between bg-purple-950 text-white md:p-8 p-3 items-center">
+    <div className="flex justify-between bg-purple-950 text-white md:p-6 p-3 items-center">
       <h1
         className="w-20 h-20 bg-cover bg-center rounded-full"
         style={{ backgroundImage: `url(${logo})` }}
