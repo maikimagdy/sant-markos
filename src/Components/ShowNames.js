@@ -292,7 +292,7 @@ function ShowNames() {
         className="bg-orange-500 text-white p-4 mt-4 inline-block rounded-lg hover:bg-orange-400 font-semibold"
         to={"/namesform"}
       >
-        Add User
+        Add Member
       </Link>
     </div>
   ) : (
