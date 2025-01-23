@@ -19,6 +19,7 @@ function NamesForm() {
       .required("You must insert a Phone number"),
     Address: Yup.string(),
     Year: Yup.number().required("You must insert a Year"),
+    Gender: Yup.string().required("You must select a gender"),
   });
 
   const {
@@ -49,6 +50,7 @@ function NamesForm() {
   const Back = () => {
     nav("/shownames");
   };
+
   if (user) {
     return (
       <div>
@@ -73,6 +75,7 @@ function NamesForm() {
           <p className="text-red-800 text-sm font-bold">
             {errors.Phone?.message}
           </p>
+
           <input
             placeholder="Year...."
             className="py-6 px-2 shadow-lg rounded-sm"
@@ -80,6 +83,18 @@ function NamesForm() {
           />
           <p className="text-red-800 text-sm font-bold">
             {errors.Year?.message}
+          </p>
+
+          <select
+            className="py-6 px-2 shadow-lg rounded-sm "
+            {...register("Gender")}
+          >
+            <option value="">Select a gender....</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <p className="text-red-800 text-sm font-bold">
+            {errors.Gender?.message}
           </p>
 
           <input
@@ -98,7 +113,7 @@ function NamesForm() {
             />
             <button
               onClick={Back}
-              className="self-start bg-blue-500 hover:bg-blue-700 px-6 py-3 font-semibold rounded-md text-white cursor-pointer "
+              className="self-start bg-blue-500 hover:bg-blue-700 px-6 py-3 font-semibold rounded-md text-white cursor-pointer"
             >
               Back
             </button>

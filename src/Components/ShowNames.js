@@ -16,6 +16,7 @@ function ShowNames() {
   const [search, setSearch] = useState("");
   const [user] = useAuthState(auth);
   const [selectedYear, setSelectedYear] = useState("");
+  const [selectedGender, setSelectedGender] = useState(""); // Gender filter state
   const [formData, setFormData] = useState({
     Name: "",
     Address: "",
@@ -94,13 +95,20 @@ function ShowNames() {
       user.Name.toLowerCase() +
       user.Phone.toLowerCase() +
       user.Address.toLowerCase() +
-      (user.Year ? user.Year.toString() : "").toLowerCase();
+      (user.Year ? user.Year.toString() : "").toLowerCase() +
+      (user.Gender ? user.Gender.toLowerCase() : "");
 
     const yearMatches = selectedYear
       ? user.Year.toString() === selectedYear
       : true;
 
-    return searchText.includes(search.toLowerCase()) && yearMatches;
+    const genderMatches = selectedGender
+      ? user.Gender?.toLowerCase() === selectedGender.toLowerCase()
+      : true;
+
+    return (
+      searchText.includes(search.toLowerCase()) && yearMatches && genderMatches
+    );
   });
 
   const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
@@ -117,7 +125,7 @@ function ShowNames() {
           ? "No results found"
           : "Information of Users..."}
       </h1>
-      <div className="mb-4 flex gap-6">
+      <div className="mb-4 flex flex-col md:flex-row  gap-6">
         <input
           type="search"
           value={search}
@@ -126,19 +134,33 @@ function ShowNames() {
           className="border-2 p-2 rounded-lg w-full max-w-md text-black"
         />
 
-        <select
-          id="year"
-          value={selectedYear}
-          onChange={(e) => setSelectedYear(e.target.value)}
-          className="border-2 p-2 rounded-lg text-gray-600"
-        >
-          <option value="">All Years</option>
-          {[...new Set(users.map((user) => user.Year))].map((year, index) => (
-            <option key={index} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
+        <div className="flex justify-between gap-6 w-full">
+          <select
+            id="year"
+            value={selectedYear}
+            onChange={(e) => setSelectedYear(e.target.value)}
+            className="border-2 p-2 rounded-lg text-gray-600 w-full"
+          >
+            <option value="">All Years</option>
+            {[...new Set(users.map((user) => user.Year))].map((year, index) => (
+              <option key={index} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
+
+          {/* Gender Filter Dropdown */}
+          <select
+            id="gender"
+            value={selectedGender}
+            onChange={(e) => setSelectedGender(e.target.value)}
+            className="border-2 p-2 rounded-lg text-gray-600 w-full "
+          >
+            <option value="">All Genders</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
       </div>
       {loading && (
         <div className="flex justify-center items-center space-x-2">
