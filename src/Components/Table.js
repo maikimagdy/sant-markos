@@ -34,7 +34,7 @@ function Table({
             <tr
               onClick={() => navFun(user.id)}
               key={user.id}
-              className="hover:bg-purple-950 text-md text-white font-semibold"
+              className="hover:bg-purple-950 text-md text-white font-semibold cursor-pointer"
             >
               {editingUser === user.id ? (
                 <>
