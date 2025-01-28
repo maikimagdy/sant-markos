@@ -6,11 +6,13 @@ import Home from "./Home";
 import NamesForm from "./Components/NamesForm";
 import ShowNames from "./Components/ShowNames";
 import WelcomePage from "./Components/WelcomePage";
+import Details from "./Components/Details";
 
 function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/details/:id" element={<Details />} />
         <Route path="/" element={<Home />}>
           <Route path="login" element={<LoginWithEmail />} />
           <Route path="signup" element={<Signup />} />

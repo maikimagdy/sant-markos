@@ -9,6 +9,7 @@ import {
 import { auth, db } from "../config/firebase.ts";
 import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Table from "./Table.js";
 
 function ShowNames() {
   const namesRef = collection(db, "Names");
@@ -44,25 +45,25 @@ function ShowNames() {
     GetUsers();
   }, []);
 
-  const DeleteDoc = async (id) => {
-    const userDoc = doc(db, "Names", id);
-    try {
-      await deleteDoc(userDoc);
-      GetUsers();
-    } catch (err) {
-      console.error("Error deleting user:", err);
-    }
-  };
+  // const DeleteDoc = async (id) => {
+  //   const userDoc = doc(db, "Names", id);
+  //   try {
+  //     await deleteDoc(userDoc);
+  //     GetUsers();
+  //   } catch (err) {
+  //     console.error("Error deleting user:", err);
+  //   }
+  // };
 
-  const startEditing = (user) => {
-    setEditingUser(user.id);
-    setFormData({
-      Name: user.Name,
-      Phone: user.Phone,
-      Address: user.Address,
-      Year: user.Year || "",
-    });
-  };
+  // const startEditing = (user) => {
+  //   setEditingUser(user.id);
+  //   setFormData({
+  //     Name: user.Name,
+  //     Phone: user.Phone,
+  //     Address: user.Address,
+  //     Year: user.Year || "",
+  //   });
+  // };
 
   const saveEditing = async () => {
     const userDoc = doc(db, "Names", editingUser);
@@ -149,7 +150,6 @@ function ShowNames() {
             ))}
           </select>
 
-          {/* Gender Filter Dropdown */}
           <select
             id="gender"
             value={selectedGender}
@@ -171,121 +171,18 @@ function ShowNames() {
 
       {!loading && (
         <>
-          <div className="overflow-x-auto">
-            <table className="table-auto w-full border-collapse border border-gray-300 shadow-lg rounded-lg">
-              <thead>
-                <tr className="bg-gray-100 text-left text-sm uppercase text-gray-600">
-                  <th className="p-4 border-b">Name</th>
-                  <th className="p-4 border-b">Address</th>
-                  <th className="p-4 border-b">Phone</th>
-                  <th className="p-4 border-b">Year</th>
-                  <th className="p-4 border-b text-center">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentUsers.map((user) => (
-                  <tr
-                    key={user.id}
-                    className="hover:bg-purple-950 text-md text-white font-semibold"
-                  >
-                    {editingUser === user.id ? (
-                      <>
-                        <td className="p-4 border-b text-black">
-                          <input
-                            value={formData.Name}
-                            onChange={(e) =>
-                              setFormData({ ...formData, Name: e.target.value })
-                            }
-                            className="border rounded-lg p-2  md:w-full w-fit"
-                          />
-                        </td>
-                        <td className=" border-b whitespace-nowrap text-black">
-                          <input
-                            value={formData.Address}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                Address: e.target.value,
-                              })
-                            }
-                            className="border rounded-lg p-2  md:w-full w-fit"
-                          />
-                        </td>
-                        <td className="p-4 border-b text-black">
-                          <input
-                            value={formData.Phone}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                Phone: e.target.value,
-                              })
-                            }
-                            className="border rounded-lg p-2  md:w-full w-fit"
-                          />
-                        </td>
-                        <td className="p-4 border-b text-black">
-                          <input
-                            value={formData.Year}
-                            onChange={(e) =>
-                              setFormData({ ...formData, Year: e.target.value })
-                            }
-                            className="border rounded-lg p-2  md:w-full w-fit"
-                          />
-                        </td>
-                        <td className="p-4 border-b">
-                          <div className="flex justify-center items-center gap-2">
-                            <button
-                              onClick={saveEditing}
-                              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-400"
-                            >
-                              Save
-                            </button>
-                            <button
-                              onClick={() => setEditingUser(null)}
-                              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400"
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        </td>
-                      </>
-                    ) : (
-                      <>
-                        <td className="p-4 border-b">
-                          {highlightText(user.Name, search)}
-                        </td>
-                        <td className="p-4 border-b">
-                          {highlightText(user.Address, search)}
-                        </td>
-                        <td className="p-4 border-b">
-                          {highlightText(user.Phone, search)}
-                        </td>
-                        <td className="p-4 border-b">
-                          {highlightText(user.Year || "N/A", search)}
-                        </td>
-                        <td className="p-4 border-b">
-                          <div className="flex justify-center items-center gap-2">
-                            <button
-                              className="bg-red-500 text-white text-lg px-4 py-2 rounded-lg hover:bg-red-400"
-                              onClick={() => DeleteDoc(user.id)}
-                            >
-                              X
-                            </button>
-                            <button
-                              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400"
-                              onClick={() => startEditing(user)}
-                            >
-                              📝
-                            </button>
-                          </div>
-                        </td>
-                      </>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Table
+            users={currentUsers}
+            search={search}
+            highlightText={highlightText}
+            editingUser={editingUser}
+            setEditingUser={setEditingUser}
+            formData={formData}
+            setFormData={setFormData}
+            // saveEditing={saveEditing}
+            // DeleteDoc={DeleteDoc}
+            // startEditing={startEditing}
+          />
           <div className="mt-4 flex justify-between items-center">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
@@ -314,7 +211,7 @@ function ShowNames() {
         className="bg-orange-500 text-white p-4 mt-4 inline-block rounded-lg hover:bg-orange-400 font-semibold"
         to={"/namesform"}
       >
-        Add Member
+        Add New Member
       </Link>
     </div>
   ) : (

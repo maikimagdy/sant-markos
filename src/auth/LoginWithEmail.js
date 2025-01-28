@@ -40,11 +40,11 @@ const LoginWithEmail = () => {
   // }
 
   return (
-    <div className="flex flex-col items-center justify-center md:mt-24 md:mr-28 mt-16  p-6 ">
+    <div className="flex flex-col items-center justify-center md:mt-24 md:mr-28 mt-16 w-full p-6 ">
       <h1 className="text-2xl font-bold mb-4">Login</h1>
       <form
         onSubmit={handleSignIn}
-        className="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 md:w-1/2"
+        className="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 md:w-9/12"
       >
         <div className="mb-4">
           <label
