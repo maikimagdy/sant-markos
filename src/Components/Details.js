@@ -53,12 +53,17 @@ function Details() {
   };
 
   const handleDelete = async () => {
-    const userRef = doc(db, "Names", id);
-    try {
-      await deleteDoc(userRef);
-      navigate("/shownames");
-    } catch (error) {
-      console.error("Error deleting user:", error);
+    const isConfirmed = window.confirm(
+      "Are You Sure You Want To Delete This Member?"
+    );
+    if (isConfirmed) {
+      const userRef = doc(db, "Names", id);
+      try {
+        await deleteDoc(userRef);
+        navigate("/shownames");
+      } catch (error) {
+        console.error("Error deleting user:", error);
+      }
     }
   };
 
@@ -79,16 +84,16 @@ function Details() {
 
   return (
     <div className="container mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold mb-4 text-center text-purple-700">
           Member Details...
         </h1>
-        <button
-          onClick={handleDelete}
-          className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-400"
+        <Link
+          className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-green-400 flex justify-center items-center font-semibold"
+          to={"/shownames"}
         >
-          Delete
-        </button>
+          Back
+        </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Existing Fields */}
@@ -204,17 +209,17 @@ function Details() {
         </div>
       </div>
       <div className="flex justify-between items-center mt-6">
-        <Link
-          className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-green-400"
-          to={"/shownames"}
-        >
-          Back
-        </Link>
         <button
           onClick={handleUpdate}
           className="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-400"
         >
           Update
+        </button>
+        <button
+          onClick={handleDelete}
+          className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-red-400"
+        >
+          Delete
         </button>
       </div>
     </div>
