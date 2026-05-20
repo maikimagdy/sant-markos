@@ -24,11 +24,11 @@ const WelcomePage = () => {
     return (
       <div className=" mt-4 justify-center ">
      <h1 className="text-xl font-semibold">
-    Welcome to ST-Markos Page Please Sign In To Continue...
-  </h1>
-  <p className="text-lg">
-    Use Email: stmarkos42@gmail.com and Password: 852456 for testing
-  </p>
+      Welcome to ST-Markos Page Please Sign In To Continue...
+    </h1>
+    <p className="text-lg">
+      Use Email: stmarkos42@gmail.com and Password: 852456 for testing
+    </p>
       </div>
     );
   }
