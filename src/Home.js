@@ -13,7 +13,7 @@ function Home() {
   }
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-screen overflow">
       <NavBar />
 
       {!user && (
