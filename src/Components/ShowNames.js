@@ -27,7 +27,7 @@ function ShowNames() {
   const [editingUser, setEditingUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const usersPerPage = 10;
+  const usersPerPage = 8;
 
   const GetUsers = async () => {
     setLoading(true);
