@@ -167,7 +167,7 @@ function NamesForm() {
           <p className="text-red-800 text-sm font-bold">
             {errors.Notes?.message}
           </p>
-          <div className="flex justify-between gap-2">
+          <div className="flex justify-between gap-2 m-2 ">
             <input
               type="submit"
               className=" bg-green-500 hover:bg-green-700 p-3 rounded-md text-white cursor-pointer font-semibold"
