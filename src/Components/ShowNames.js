@@ -208,7 +208,7 @@ function ShowNames() {
       )}
 
       <Link
-        className="bg-orange-500 text-white p-4 mt-4 inline-block rounded-lg hover:bg-orange-400 font-semibold"
+        className="bg-orange-500 text-white p-4 mt-2 inline-block rounded-lg hover:bg-orange-400 font-semibold"
         to={"/namesform"}
       >
         Add New Member
