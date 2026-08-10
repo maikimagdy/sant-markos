@@ -21,7 +21,7 @@ function Home() {
     <div className={isFullScreen ? "h-screen overflow-hidden" : ""}>
       <NavBar />
 
-      {!user && location.pathname === "/login" && (
+      {!user && (
         <div className="h-[calc(100vh-64px)] flex flex-col items-center justify-center px-4">
 
           {/* Tip */}
