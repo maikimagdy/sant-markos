@@ -18,6 +18,9 @@ function Home() {
       {!user && (
         <h1 className="text-xl font-semibold ml-2 ">
           Welcome to ST-Markos Page Please Sign In To Continue...
+          use this email and password for website review:
+          email:stmarkos42@gmail.com
+          pass:852456
         </h1>
       )}
       <Outlet />
