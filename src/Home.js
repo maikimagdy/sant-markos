@@ -1,29 +1,36 @@
 import React from "react";
 import NavBar from "./Components/NavBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import WelcomePage from "./Components/WelcomePage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./config/firebase.ts";
 
 function Home() {
   const [user, loading] = useAuthState(auth);
+  const location = useLocation();
+
+  const fullScreenRoutes = ["/", "/login", "/signup"];
+
+  const isFullScreen = fullScreenRoutes.includes(location.pathname);
 
   if (loading) {
     return <h1>Loading...</h1>;
   }
 
   return (
-    <div>
+    <div className={isFullScreen ? "h-screen overflow-hidden" : ""}>
       <NavBar />
 
-      {!user && (
+      {!user && location.pathname === "/login" && (
         <div className="h-[calc(100vh-64px)] flex flex-col items-center justify-center px-4">
-          
+
           {/* Tip */}
           <div className="w-full max-w-md mb-6">
             <div className="rounded-xl border border-blue-200 bg-blue-50 px-5 py-4 shadow-sm">
+
               <div className="flex items-center gap-2 mb-2">
                 <span>💡</span>
+
                 <h2 className="font-semibold text-blue-800">
                   Quick Tip
                 </h2>
@@ -48,10 +55,10 @@ function Home() {
                   </p>
                 </div>
               </div>
+
             </div>
           </div>
 
-          {/* Login */}
           <div className="w-full max-w-2xl">
             <Outlet />
           </div>
@@ -59,7 +66,9 @@ function Home() {
         </div>
       )}
 
-      {user && <Outlet />}
+      {(!(!user && location.pathname === "/login")) && (
+        <Outlet />
+      )}
     </div>
   );
 }
