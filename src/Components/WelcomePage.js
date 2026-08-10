@@ -195,7 +195,7 @@ const WelcomePage = () => {
         </div>
 
         <button
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/")}
           className="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
         >
           ← Back to Sign In
