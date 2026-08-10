@@ -1,3 +1,20 @@
+import React from "react";
+import NavBar from "./Components/NavBar";
+import { Outlet } from "react-router-dom";
+import WelcomePage from "./Components/WelcomePage";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./config/firebase.ts";
+
+function Home() {
+  const [user, loading, error] = useAuthState(auth);
+
+  if (loading) {
+    return <h1>Loading...</h1>; // Optionally show a loading message while auth is being processed
+  }
+
+  return (
+    <div>
+      <NavBar />
 {!user && (
   <div className="min-h-[calc(100vh-64px)] flex items-center justify-center bg-gray-50 px-4">
     <div className="w-full max-w-lg rounded-2xl bg-white p-8 shadow-xl border border-gray-100 text-center">
@@ -54,3 +71,9 @@
     </div>
   </div>
 )}
+      <Outlet />
+    </div>
+  );
+}
+
+export default Home;
