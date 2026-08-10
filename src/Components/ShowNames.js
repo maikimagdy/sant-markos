@@ -183,7 +183,7 @@ function ShowNames() {
             // DeleteDoc={DeleteDoc}
             // startEditing={startEditing}
           />
-          <div className="mt-4 flex justify-between items-center">
+          <div className="mt-2 flex justify-between items-center">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-400"
