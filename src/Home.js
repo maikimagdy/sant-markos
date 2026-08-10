@@ -19,8 +19,8 @@ function Home() {
         <h1 className="text-xl font-semibold ml-2 ">
           Welcome to ST-Markos Page Please Sign In To Continue...
           <p>use this email and password for website review:</p>
-           <div className:"flex flex-col align-center items-center"> email:stmarkos42@gmail.com
-                 pass:852456
+           <div className:"flex flex-col align-center items-center"><p> email:stmarkos42@gmail.com</p>
+                 <p>pass:852456</p>
           </div>
         </h1>
       )}
