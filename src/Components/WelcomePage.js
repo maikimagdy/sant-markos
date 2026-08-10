@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../config/firebase.ts";
+import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 const WelcomePage = () => {
@@ -22,7 +23,19 @@ const WelcomePage = () => {
     }
   }, [user, navigate]);
 
+  // Sign out unauthorized user and return to login
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      navigate("/login");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  // ==========================================
   // No user is logged in
+  // ==========================================
   if (!user) {
     return (
       <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4">
@@ -50,6 +63,7 @@ const WelcomePage = () => {
             </p>
 
             <div className="space-y-2">
+
               <div className="rounded-lg bg-white border border-blue-100 px-4 py-3">
                 <p className="text-xs text-gray-400 uppercase">
                   Email
@@ -69,6 +83,7 @@ const WelcomePage = () => {
                   852456
                 </p>
               </div>
+
             </div>
           </div>
 
@@ -77,7 +92,9 @@ const WelcomePage = () => {
     );
   }
 
+  // ==========================================
   // Authorized admin user
+  // ==========================================
   if (user.email === adminEmail) {
     return (
       <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4">
@@ -108,44 +125,57 @@ const WelcomePage = () => {
     );
   }
 
+  // ==========================================
   // Authenticated but unauthorized user
+  // ==========================================
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4">
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 py-8">
+
       <div className="w-full max-w-lg rounded-2xl bg-white border border-red-100 shadow-lg p-8 text-center">
 
-        {/* Lock icon */}
+        {/* Lock Icon */}
         <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
           <span className="text-3xl">🔐</span>
         </div>
 
+        {/* Title */}
         <h1 className="text-2xl font-bold text-gray-800 mb-3">
           Access Restricted
         </h1>
 
-        <p className="text-gray-500 mb-6">
+        <p className="text-gray-500 mb-6 leading-relaxed">
           Your account has been successfully authenticated, but it is
           not authorized to access the ST-Markos application.
         </p>
 
-        {/* Authentication status */}
+        {/* Authentication Status */}
         <div className="rounded-xl bg-gray-50 border border-gray-200 p-4 mb-6 text-left">
 
           <div className="flex items-center gap-2 mb-3">
-            <span className="text-green-500">✓</span>
+            <span className="text-green-500 font-bold">
+              ✓
+            </span>
+
             <span className="text-sm text-gray-700">
               Authentication verified
             </span>
           </div>
 
           <div className="flex items-center gap-2 mb-3">
-            <span className="text-green-500">✓</span>
+            <span className="text-green-500 font-bold">
+              ✓
+            </span>
+
             <span className="text-sm text-gray-700">
               User identity checked
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-red-500">✕</span>
+            <span className="text-red-500 font-bold">
+              ✕
+            </span>
+
             <span className="text-sm text-gray-700">
               Account is not authorized
             </span>
@@ -153,7 +183,7 @@ const WelcomePage = () => {
 
         </div>
 
-        {/* Demo credentials */}
+        {/* Authorized Demo Account */}
         <div className="rounded-xl bg-blue-50 border border-blue-100 p-5 text-left mb-6">
 
           <h2 className="font-semibold text-blue-800 mb-2">
@@ -166,6 +196,7 @@ const WelcomePage = () => {
           </p>
 
           <div className="rounded-lg bg-white border border-blue-100 px-4 py-3">
+
             <p className="text-xs text-gray-400 uppercase">
               Email
             </p>
@@ -173,11 +204,12 @@ const WelcomePage = () => {
             <p className="text-sm font-medium text-gray-700">
               {adminEmail}
             </p>
+
           </div>
 
         </div>
 
-        {/* Sign up explanation */}
+        {/* Sign Up Explanation */}
         <div className="text-left mb-6">
 
           <h2 className="font-semibold text-gray-800 mb-2">
@@ -194,14 +226,16 @@ const WelcomePage = () => {
 
         </div>
 
+        {/* Sign Out Button */}
         <button
-          onClick={() => navigate("/")}
-          className="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+          onClick={handleSignOut}
+          className="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700 active:scale-[0.98]"
         >
-          ← Back to Sign In
+          ← Sign Out & Return to Sign In
         </button>
 
       </div>
+
     </div>
   );
 };
