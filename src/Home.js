@@ -6,72 +6,60 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./config/firebase.ts";
 
 function Home() {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   if (loading) {
-    return <h1>Loading...</h1>; // Optionally show a loading message while auth is being processed
+    return <h1>Loading...</h1>;
   }
 
   return (
-    <div>
+    <div className="h-screen overflow-hidden">
       <NavBar />
-{!user && (
-  <div className="min-h-[calc(100vh-64px)] flex items-center justify-center bg-gray-50 px-4">
-    <div className="w-full max-w-lg rounded-2xl bg-white p-8 shadow-xl border border-gray-100 text-center">
-      
-      {/* Icon */}
-      <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-        <span className="text-3xl">👋</span>
-      </div>
 
-      {/* Welcome */}
-      <h1 className="text-3xl font-bold text-gray-800 mb-3">
-        Welcome to ST-Markos
-      </h1>
+      {!user && (
+        <div className="h-[calc(100vh-64px)] flex flex-col items-center justify-center px-4">
+          
+          {/* Tip */}
+          <div className="w-full max-w-md mb-6">
+            <div className="rounded-xl border border-blue-200 bg-blue-50 px-5 py-4 shadow-sm">
+              <div className="flex items-center gap-2 mb-2">
+                <span>💡</span>
+                <h2 className="font-semibold text-blue-800">
+                  Quick Tip
+                </h2>
+              </div>
 
-      <p className="text-gray-500 mb-6">
-        Please sign in to continue and explore the website.
-      </p>
+              <p className="text-sm text-blue-700 mb-3">
+                Use these credentials to review the website:
+              </p>
 
-      {/* Review Notice */}
-      <div className="rounded-xl bg-blue-50 border border-blue-100 p-5 text-left">
-        <h2 className="text-lg font-semibold text-blue-800 mb-2">
-          🔍 Website Review
-        </h2>
+              <div className="flex gap-3">
+                <div className="flex-1 rounded-lg bg-white border border-blue-100 px-3 py-2">
+                  <p className="text-xs text-gray-400">Email</p>
+                  <p className="text-sm font-medium text-gray-700 truncate">
+                    stmarkos42@gmail.com
+                  </p>
+                </div>
 
-        <p className="text-sm text-gray-600 mb-4">
-          You can use the credentials below to review the website:
-        </p>
-
-        {/* Credentials */}
-        <div className="space-y-3">
-          <div className="rounded-lg bg-white px-4 py-3 border border-blue-100">
-            <p className="text-xs font-medium text-gray-400 uppercase">
-              Email
-            </p>
-            <p className="text-sm font-semibold text-gray-800 break-all">
-              stmarkos42@gmail.com
-            </p>
+                <div className="w-32 rounded-lg bg-white border border-blue-100 px-3 py-2">
+                  <p className="text-xs text-gray-400">Password</p>
+                  <p className="text-sm font-medium text-gray-700">
+                    852456
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="rounded-lg bg-white px-4 py-3 border border-blue-100">
-            <p className="text-xs font-medium text-gray-400 uppercase">
-              Password
-            </p>
-            <p className="text-sm font-semibold text-gray-800">
-              852456
-            </p>
+          {/* Login */}
+          <div className="w-full max-w-2xl">
+            <Outlet />
           </div>
+
         </div>
-      </div>
+      )}
 
-      <p className="mt-5 text-xs text-gray-400">
-        These credentials are provided for website review purposes.
-      </p>
-    </div>
-  </div>
-)}
-      <Outlet />
+      {user && <Outlet />}
     </div>
   );
 }
