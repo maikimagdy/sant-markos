@@ -16,13 +16,18 @@ function Home() {
     <div>
       <NavBar />
       {!user && (
-        <h1 className="text-xl font-semibold ml-2 ">
-          Welcome to ST-Markos Page Please Sign In To Continue...
-          <p> use this email and password for website review:</p>
-           <div className:"flex flex-col align-center items-center"><p> email:stmarkos42@gmail.com</p>
-                 <p>pass:852456</p>
-          </div>
-        </h1>
+        <div className="text-xl font-semibold ml-2">
+  <h1>Welcome to ST-Markos Page</h1>
+
+  <p>Please Sign In To Continue...</p>
+
+  <p>Use this email and password for website review:</p>
+
+  <div className="flex flex-col items-center">
+    <p>Email: stmarkos42@gmail.com</p>
+    <p>Password: 852456</p>
+  </div>
+</div>
       )}
       <Outlet />
     </div>
